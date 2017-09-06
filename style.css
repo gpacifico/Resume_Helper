@@ -9,3 +9,38 @@ body > * {
 * {
   box-sizing: border-box;
 }
+
+textarea {
+  border: 1px solid black;
+  resize: none;
+}
+
+* {
+  /*font-family: 'Raleway', sans-serif;*/
+  font-family: 'Montserrat', sans-serif;
+}
+
+#header-text {
+  /*font-family: 'Slabo 27px', serif;*/
+  /*font-family: 'Roboto Slab', serif;*/
+  /*font-family: 'Raleway', sans-serif;*/
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+#application-text, #output{
+  width: 100%;
+  height: 300px;
+}
+
+#analyze-application-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#footer {
+  background-color: rgba(50, 50, 50, 1);
+  color: white;
+  position: absolute;
+  top: 100vh;
+  transform: translateY(-100%);
+}
