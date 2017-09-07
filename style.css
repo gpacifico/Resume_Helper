@@ -8,6 +8,7 @@ body > * {
 
 * {
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 textarea {
@@ -15,15 +16,13 @@ textarea {
   resize: none;
 }
 
-* {
-  /*font-family: 'Raleway', sans-serif;*/
-  font-family: 'Montserrat', sans-serif;
+#main-wrapper {
+  min-height: 100vh;
+  position: relative;
+  padding: 0 0 100px 0;
 }
 
 #header-text {
-  /*font-family: 'Slabo 27px', serif;*/
-  /*font-family: 'Roboto Slab', serif;*/
-  /*font-family: 'Raleway', sans-serif;*/
   font-family: 'Helvetica Neue', sans-serif;
 }
 
@@ -41,6 +40,7 @@ textarea {
   background-color: rgba(50, 50, 50, 1);
   color: white;
   position: absolute;
-  top: 100vh;
-  transform: translateY(-100%);
+  right: 0;
+  left: 0;
+  bottom: 0;
 }

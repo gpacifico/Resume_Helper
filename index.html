@@ -18,37 +18,39 @@
   <script src="./script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1 id="header-text">Resume Helper</h1>
+  <div id="main-wrapper" class="container-fluid">
+    <div id="content" class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 id="header-text">Resume Helper</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <textarea id="application-text" placeholder="Paste Application Text Here"></textarea><br>
+          <button class="btn btn-primary" id="analyze-application-text">Click Me</button>
+        </div>
+        <div class="col-sm-6">
+          <textarea id="output" placeholder="Output Will Appear Here"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Instructions</h3>
+          <ol>
+            <li>Paste the job application in the first area</li>
+            <li>Click Submit</li>
+            <li>We'll show you the most common traits the employer wants</li>
+          </ol>
+          <p>Find the buzz words in job applications by using our frequency engine! Quickly nail down exactly what the employer wants to see. With Resume Helper, you can stand out and show your skills at the same time.</p>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <textarea id="application-text" placeholder="Paste Application Text Here"></textarea><br>
-        <button class="btn btn-primary" id="analyze-application-text">Click Me</button>
-      </div>
-      <div class="col-sm-6">
-        <textarea id="output" placeholder="Output Will Appear Here"></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <h3>Instructions</h3>
-        <ol>
-          <li>Paste the job application in the first area</li>
-          <li>Click Submit</li>
-          <li>We'll show you the most common traits the employer wants</li>
-        </ol>
-        <p>Find the buzz words in job applications by using our frequency engine! Quickly nail down exactly what the employer wants to see. With Resume Helper, you can stand out and show your skills at the same time.</p>
-      </div>
-    </div>
-  </div>
-  <div id="footer" class="container-fluid">
-    <div class="row">
-      <div class="col-sm-12">
-        <p class="text-center">Created With Bootstrap 3, HTML, CSS, and Javascript</p>
+    <div id="footer" class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <p class="text-center">Created With Bootstrap 3, HTML, CSS, and Javascript</p>
+        </div>
       </div>
     </div>
   </div>
