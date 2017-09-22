@@ -23,6 +23,7 @@ function startHelp() {
         // getText('#application-text');
         // arrayTheText('#application-text');
         compare('#application-text');
+        goBig(matching);
         // alert('button');
     })
 }
@@ -37,7 +38,7 @@ function arrayTheText(jobName) {
 function compare(resumeArray) {
     var wordsArray = [];
     wordsArray = arrayTheText(resumeArray);
-    var matching = {};
+    matching = {};
     for(var i = 0; i < wordsArray.length; i++ ) {
         if (!matching[wordsArray[i]]) {
             matching[wordsArray[i]] = 1;
@@ -51,8 +52,44 @@ function compare(resumeArray) {
         }
     }
     console.log(matching);
+    return matching;
 }
 
+function goBig(wordList) {
+    var biggest = 1;
+    for (var g = 0; g < Object.keys(wordList).length; g++) {
+        if (wordList[Object.keys(wordList)[g]] > biggest) {
+            biggest = wordList[Object.keys(wordList)[g]];
+        }
+    }
+    // console.log("WL of 0: " + wordList[0]);
+    console.log("WL of 0: " + wordList[Object.keys(wordList)[0]]);
+    // console.log("WL of 0 version 2: " + Object.keys(wordList)[Object.values(wordList)[g]]);
+    console.log("biggest: " + biggest);
+    // console.log(wordList);
+    // if (wordList[biggest] !== 0) {
+    //     wordList[biggest] = 0;
+    //     goBig(wordList);
+    // }
+}
+
+
+// function goBig(wordList) {
+//     var biggest = 1;
+//     for (var g = 0; g < Object.values(wordList).length; g++) {
+//         if (Object.values(wordList)[g] > biggest) {
+//             biggest = Object.values(wordList)[g];
+//         }
+//     }
+//     console.log("WL of 0: " + wordList[0]);
+//     console.log("WL of 0 version 2: " + Object.keys(wordList)[Object.values(wordList)[g]]);
+//     console.log("biggest: " + biggest);
+//     // console.log(wordList);
+//     // if (wordList[biggest] !== 0) {
+//     //     wordList[biggest] = 0;
+//     //     goBig(wordList);
+//     // }
+// }
 
 
 // function compare(resumeArray) {
