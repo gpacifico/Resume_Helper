@@ -56,16 +56,26 @@ function compare(resumeArray) {
 }
 
 function goBig(wordList) {
-    var biggest = 1;
-    for (var g = 0; g < Object.keys(wordList).length; g++) {
-        if (wordList[Object.keys(wordList)[g]] > biggest) {
-            biggest = wordList[Object.keys(wordList)[g]];
+    var biggest = -1;
+    var biggestIndex= 0;
+    do {
+        biggest = -1;
+        for (var g = 0; g < Object.keys(wordList).length; g++) {
+            if (wordList[Object.keys(wordList)[g]] > biggest) {
+                biggest = wordList[Object.keys(wordList)[g]];
+                biggestIndex = g;
+            }
         }
-    }
-    // console.log("WL of 0: " + wordList[0]);
+        // console.log('Value of Biggest', wordList[Object.keys(wordList)[biggest]]);
+        wordList[Object.keys(wordList)[biggestIndex]] = 0;
+        // console.log('wordlist', wordList);
+        console.log("biggest Value: " + biggest);
+        console.log("biggest Key: " + Object.keys(wordList)[biggestIndex]);
+        // console.log('biggest Comparison', biggest != 0);
+    } while (biggest != 0);
     console.log("WL of 0: " + wordList[Object.keys(wordList)[0]]);
-    // console.log("WL of 0 version 2: " + Object.keys(wordList)[Object.values(wordList)[g]]);
-    console.log("biggest: " + biggest);
+    console.log("WL of 1: " + wordList[Object.keys(wordList)[1]]);
+    console.log("key of 0: " + Object.keys(wordList)[0]);
     // console.log(wordList);
     // if (wordList[biggest] !== 0) {
     //     wordList[biggest] = 0;
