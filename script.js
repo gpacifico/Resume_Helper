@@ -1,18 +1,8 @@
 $(document).ready(function () {
     startHelp();
-    // // Would probably put this in its own function,like function init() {};
-    // $('#analyze-application-text').click(function () {
-    //
-    //     // This function returns, and you didn't capture it, need a var $xx = getText(zzz);
-    //     getText('#application-text');
-    //     // alert("button");
-    //     alert(getText('#application-text'));
-    //
-    // });
 });
 
 function getText(textbox) {
-    //probably would just make textbox into $textbox, pass in a jq element
     var description = $(textbox).val();
     console.log(description);
     return description;
@@ -20,11 +10,10 @@ function getText(textbox) {
 
 function startHelp() {
     $('#analyze-application-text').click(function () {
-        // getText('#application-text');
-        // arrayTheText('#application-text');
         compare('#application-text');
-        goBig(matching);
-        // alert('button');
+        var orderWords = goBig(matching);
+        $("#output").text(orderWords);
+        console.log(orderWords);
     })
 }
 
@@ -58,6 +47,9 @@ function compare(resumeArray) {
 function goBig(wordList) {
     var biggest = -1;
     var biggestIndex= 0;
+    var sortedWords = [];
+    var sortedAmounts = [];
+    var together = [];
     do {
         biggest = -1;
         for (var g = 0; g < Object.keys(wordList).length; g++) {
@@ -66,98 +58,20 @@ function goBig(wordList) {
                 biggestIndex = g;
             }
         }
-        // console.log('Value of Biggest', wordList[Object.keys(wordList)[biggest]]);
-        wordList[Object.keys(wordList)[biggestIndex]] = 0;
-        // console.log('wordlist', wordList);
-        console.log("biggest Value: " + biggest);
-        console.log("biggest Key: " + Object.keys(wordList)[biggestIndex]);
-        // console.log('biggest Comparison', biggest != 0);
+        if (biggest != 0) {
+            wordList[Object.keys(wordList)[biggestIndex]] = 0;
+            sortedWords.push(Object.keys(wordList)[biggestIndex]);
+            sortedAmounts.push(biggest);
+            console.log("biggest Value: " + biggest);
+            console.log("biggest Key: " + Object.keys(wordList)[biggestIndex]);
+            console.log("sortedWords: " + sortedWords);
+            console.log("sortedAmounts: " + sortedAmounts);
+        }
     } while (biggest != 0);
-    console.log("WL of 0: " + wordList[Object.keys(wordList)[0]]);
-    console.log("WL of 1: " + wordList[Object.keys(wordList)[1]]);
-    console.log("key of 0: " + Object.keys(wordList)[0]);
-    // console.log(wordList);
-    // if (wordList[biggest] !== 0) {
-    //     wordList[biggest] = 0;
-    //     goBig(wordList);
-    // }
+    console.log("sortedWords2: " + sortedWords);
+    for (var r = 0; r < sortedWords.length; r++) {
+        together.push(sortedWords[r] + " shows up " + sortedAmounts[r] + " times");
+    }
+    console.log("together: " + together);
+    return together.join("\n");
 }
-
-
-// function goBig(wordList) {
-//     var biggest = 1;
-//     for (var g = 0; g < Object.values(wordList).length; g++) {
-//         if (Object.values(wordList)[g] > biggest) {
-//             biggest = Object.values(wordList)[g];
-//         }
-//     }
-//     console.log("WL of 0: " + wordList[0]);
-//     console.log("WL of 0 version 2: " + Object.keys(wordList)[Object.values(wordList)[g]]);
-//     console.log("biggest: " + biggest);
-//     // console.log(wordList);
-//     // if (wordList[biggest] !== 0) {
-//     //     wordList[biggest] = 0;
-//     //     goBig(wordList);
-//     // }
-// }
-
-
-// function compare(resumeArray) {
-//     arrayTheText(resumeArray);
-//     for(var i = 0; i < resumeArray.length; i++ ) {
-//         for(var j = 1; j < resumeArray.length; j++) {
-//             if (resumeArray[i] === resumeArray[j]) {
-//                 console.log(resumeArray[i]);
-//                 return resumeArray[i];
-//             }
-//         }
-//     }
-// }
-
-
-
-
-
-
-
-
-// function getDescription() {
-//     var $jobAd = $('#application-text');
-//     var ad = getText($jobAd);
-//     return ad;
-// }
-
-
-
-// getDescirption($jox) {
-//     var description = $textbox.val();
-//     return description;
-// }
-//
-//
-// function() {
-//     $tzzextbox = $('#textbox');
-//     var description = getDescription($tzzextbox);
-//     var input = getDescription($('#inputbox'));
-// }
-//
-//
-//
-// var description = getDescription($textbox);
-//
-// textbox
-//
-// textbox.value;
-//
-// $text.va();
-
-
-// function getDescription() {
-//     var description = $('#application-text').val();
-//     return description;
-// }
-//
-// function splitDescription(words) {
-//     getDescription();
-//
-// }
