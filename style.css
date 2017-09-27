@@ -44,11 +44,15 @@ textarea {
   bottom: 0;
 }
 
-#footer, #blue {
+#footer, #blue, a {
   color: #fff;
 }
 
 #blue {
   background-color: #4285F4;
   margin-bottom: 30px;
+}
+
+a:hover {
+  text-decoration: none;
 }
