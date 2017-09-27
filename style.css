@@ -38,9 +38,17 @@ textarea {
 
 #footer {
   background-color: rgba(50, 50, 50, 1);
-  color: white;
   position: absolute;
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+#footer, #blue {
+  color: #fff;
+}
+
+#blue {
+  background-color: #4285F4;
+  margin-bottom: 30px;
 }

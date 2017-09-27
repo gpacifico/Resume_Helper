@@ -5,7 +5,6 @@ $(document).ready(function () {
 function getText(textbox) {
     var description = $(textbox).val().toLowerCase();
     description = getSanitizeWords(description);
-    console.log("description: " + description);
     return description;
 }
 
@@ -25,14 +24,12 @@ function startHelp() {
         compare('#application-text');
         var orderWords = goBig(matching);
         $("#output").text(orderWords);
-        // console.log(orderWords);
     })
 }
 
 function arrayTheText(jobName) {
     var jobAd = getText(jobName);
     var jobArray = jobAd.split(" ");
-    // console.log(jobArray);
     return jobArray;
 }
 
@@ -52,7 +49,6 @@ function compare(resumeArray) {
             }
         }
     }
-    // console.log(matching);
     return matching;
 }
 
@@ -74,18 +70,8 @@ function goBig(wordList) {
             wordList[Object.keys(wordList)[biggestIndex]] = 0;
             sortedWords.push(Object.keys(wordList)[biggestIndex]);
             sortedAmounts.push(biggest);
-            // console.log("biggest Value: " + biggest);
-            // console.log("biggest Key: " + Object.keys(wordList)[biggestIndex]);
-            // console.log("sortedWords: " + sortedWords);
-            // console.log("sortedAmounts: " + sortedAmounts);
         }
     } while (biggest != 0);
-    // console.log("sortedWords2: " + sortedWords);
-    // for (var r = 0; r < sortedWords.length; r++) {
-    //     together.push(sortedWords[r] + " shows up " + sortedAmounts[r] + " times");
-    // }
-    // console.log("together: " + together);
-    // return together.join("\n");
     var outputs;
     outputs = showOutput(sortedWords, sortedAmounts);
     return outputs;
@@ -104,17 +90,15 @@ function showOutput(wordList, sortedAmounts) {
                 output += "\n\n" + sortedAmounts[w];
             }
             if (sortedAmounts[w] === 1) {
-                output += " time:";
+                output += " OCCURRENCE:";
             }
             else {
-                output += " times:";
+                output += " OCCURRENCES:";
             }
-            // output += "\n______________________"
         }
         output += "\n" + wordList[w];
         currentNumber = sortedAmounts[w];
     }
-    console.log("OUTPUT: " + output);
     return output;
 }
 
@@ -148,12 +132,12 @@ function getExcludedList(words) {
         "disability", "sex", "gender", "religion", "veteran", "status", "self", "protected", "by", "law", "can", "do", "will",
         "receive", "color", "regard", "to", "with", "without", "characteristic", "characteristics", "national", "origin", "orientation",
         "regardless", "sexual", "qualified", "qualifications", "qualification", "race", "identity", "identities", "lgbt", "commit",
-        "this", "that", "where", "when", "how", "why", "who", "list"];
+        "this", "that", "where", "when", "how", "why", "who", "list", "month", "necessary", "ethnicity", "creed", "hard", "easy",
+        "comfortable", "applicant", "applicants", "able", "holiday", "holidays", "all", "employment"];
     var clean = words;
     exclusionList.map(function (item) {
         var re = new RegExp("\\W" + item + "\\W", 'g');
         clean = clean.replace(re, " ");
-        console.log("HEY LOOK: " + re);
     });
     return clean;
 }
