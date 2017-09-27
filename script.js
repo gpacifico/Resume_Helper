@@ -1,43 +1,42 @@
 $(document).ready(function () {
     startHelp();
-    // // Would probably put this in its own function,like function init() {};
-    // $('#analyze-application-text').click(function () {
-    //
-    //     // This function returns, and you didn't capture it, need a var $xx = getText(zzz);
-    //     getText('#application-text');
-    //     // alert("button");
-    //     alert(getText('#application-text'));
-    //
-    // });
 });
 
 function getText(textbox) {
-    //probably would just make textbox into $textbox, pass in a jq element
-    var description = $(textbox).val();
-    console.log(description);
+    var description = $(textbox).val().toLowerCase();
+    description = getSanitizeWords(description);
     return description;
+}
+
+function getSanitizeWords(words) {
+    var sanitizeWords;
+    sanitizeWords = words;
+    sanitizeWords = getExcludedList(sanitizeWords);
+    sanitizeWords = sanitizeWords.replace(/[^a-z0-9 ]/g," ");
+    sanitizeWords = sanitizeWords.replace(/( \d+)|(\$\d+)|(#\d+)|(,\d+)|(\.\d+)/g," ");
+    sanitizeWords = sanitizeWords.replace(/ +/g," ");
+    sanitizeWords = sanitizeWords.replace(/ $/g,"");
+    return sanitizeWords;
 }
 
 function startHelp() {
     $('#analyze-application-text').click(function () {
-        // getText('#application-text');
-        // arrayTheText('#application-text');
         compare('#application-text');
-        // alert('button');
+        var orderWords = goBig(matching);
+        $("#output").text(orderWords);
     })
 }
 
 function arrayTheText(jobName) {
     var jobAd = getText(jobName);
     var jobArray = jobAd.split(" ");
-    console.log(jobArray);
     return jobArray;
 }
 
 function compare(resumeArray) {
     var wordsArray = [];
     wordsArray = arrayTheText(resumeArray);
-    var matching = {};
+    matching = {};
     for(var i = 0; i < wordsArray.length; i++ ) {
         if (!matching[wordsArray[i]]) {
             matching[wordsArray[i]] = 1;
@@ -50,67 +49,95 @@ function compare(resumeArray) {
             }
         }
     }
-    console.log(matching);
+    return matching;
 }
 
+function goBig(wordList) {
+    var biggest = -1;
+    var biggestIndex= 0;
+    var sortedWords = [];
+    var sortedAmounts = [];
+    var together = [];
+    do {
+        biggest = -1;
+        for (var g = 0; g < Object.keys(wordList).length; g++) {
+            if (wordList[Object.keys(wordList)[g]] > biggest) {
+                biggest = wordList[Object.keys(wordList)[g]];
+                biggestIndex = g;
+            }
+        }
+        if (biggest != 0) {
+            wordList[Object.keys(wordList)[biggestIndex]] = 0;
+            sortedWords.push(Object.keys(wordList)[biggestIndex]);
+            sortedAmounts.push(biggest);
+        }
+    } while (biggest != 0);
+    var outputs;
+    outputs = showOutput(sortedWords, sortedAmounts);
+    return outputs;
+}
 
+function showOutput(wordList, sortedAmounts) {
+    var lastNumber = sortedAmounts[0] + 1;
+    var currentNumber = sortedAmounts[0];
+    var output = "";
+    for(var w = 0; w < wordList.length; w++) {
+        if(lastNumber > currentNumber) {
+            lastNumber = currentNumber;
+            if(output === "") {
+                output += sortedAmounts[w];
+            } else {
+                output += "\n\n" + sortedAmounts[w];
+            }
+            if (sortedAmounts[w] === 1) {
+                output += " OCCURRENCE:";
+            }
+            else {
+                output += " OCCURRENCES:";
+            }
+        }
+        output += "\n" + wordList[w];
+        currentNumber = sortedAmounts[w];
+    }
+    return output;
+}
 
-// function compare(resumeArray) {
-//     arrayTheText(resumeArray);
-//     for(var i = 0; i < resumeArray.length; i++ ) {
-//         for(var j = 1; j < resumeArray.length; j++) {
-//             if (resumeArray[i] === resumeArray[j]) {
-//                 console.log(resumeArray[i]);
-//                 return resumeArray[i];
-//             }
-//         }
-//     }
-// }
-
-
-
-
-
-
-
-
-// function getDescription() {
-//     var $jobAd = $('#application-text');
-//     var ad = getText($jobAd);
-//     return ad;
-// }
-
-
-
-// getDescirption($jox) {
-//     var description = $textbox.val();
-//     return description;
-// }
-//
-//
-// function() {
-//     $tzzextbox = $('#textbox');
-//     var description = getDescription($tzzextbox);
-//     var input = getDescription($('#inputbox'));
-// }
-//
-//
-//
-// var description = getDescription($textbox);
-//
-// textbox
-//
-// textbox.value;
-//
-// $text.va();
-
-
-// function getDescription() {
-//     var description = $('#application-text').val();
-//     return description;
-// }
-//
-// function splitDescription(words) {
-//     getDescription();
-//
-// }
+function getExcludedList(words) {
+    var exclusionList = ["a","an","the","aboard","about","above","across","after","against","along","amid","among","anti",
+        "around","as","at","before","behind","below","beneath","beside","besides","between","beyond","but","by","concerning",
+        "considering","despite","down","during","except","excepting","excluding","following","for","from","in","inside","into",
+        "like","minus","near","of","off","on","onto","opposite","outside","over","past","per","plus","regarding","round","save",
+        "since","than","through","to","toward","towards","under","underneath","unlike","until","up","upon","versus","via","with",
+        "within","without","for","and","nor","but","or","yet","so","both and","either or","neither nor","not only but also",
+        "whether or","after","although","as","as soon as","because","before","by the time","even if","even though","every time",
+        "if","in case","in the event that","just in case","now that","once","only if","only since","the first time","though",
+        "unless","until","when","whenever","whereas","whether or not","after","how","till","'til","although","if","unless",
+        "as","inasmuch until","as if","in order","that","when","as long as","lest","whenever","as much as","now that","where",
+        "as soon","as provided","wherever","as though","since","while","because so","that","before than","even if that",
+        "even though","though", "and up", "you", "i", "work", "want", "need", "are", "opportunity", "employer", "employee",
+        "opportunities", "week", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "morning",
+        "night", "happy", "hour", "coffee", "benefits", "salary", "time", "must", "be", "attract", "privately", "owned",
+        "company", "industry", "job", "type", "expenses", "situation", "continue", "continuing", "association", "requirement",
+        "requirements", "department", "statement", "experience", "paid", "previous", "work", "well", "responsibilities",
+        "responsibility", "is", "are", "our","applications","action","is","members","we","homeowners","property","irvine",
+        "strategy","board","ca","year","california","time","san","has","have","had","best","talent","mind","application","\\d+k",
+        "years","reviews","candidates","willing","site","friday","corporate","office","telecommuting","not","available","this",
+        "a","player","you","largest","offices","diego","francisco","employees","state","been","associations","grow","to","retain",
+        "equip","resources","can","flexibly","applied","any","situation","specific","create","efficiencies","efficiency","every",
+        "also","used","focused","intelligently","offer","starting","start","started","starts","depending","career","growth","on",
+        "going","training","mentor","mentors","successful","select","education","position","goal","teams","cool","make","life",
+        "easier","user","first","foremost","always","looking","line","statement","determine","conception","completion","story",
+        "clear","understanding","use","case","effectively","multiple","projects","end","service","descriptions","minimum","high",
+        "performance","rendering","knowledge","progress","equal","employer","type","full","salary","location","required","experience",
+        "disability", "sex", "gender", "religion", "veteran", "status", "self", "protected", "by", "law", "can", "do", "will",
+        "receive", "color", "regard", "to", "with", "without", "characteristic", "characteristics", "national", "origin", "orientation",
+        "regardless", "sexual", "qualified", "qualifications", "qualification", "race", "identity", "identities", "lgbt", "commit",
+        "this", "that", "where", "when", "how", "why", "who", "list", "month", "necessary", "ethnicity", "creed", "hard", "easy",
+        "comfortable", "applicant", "applicants", "able", "holiday", "holidays", "all", "employment"];
+    var clean = words;
+    exclusionList.map(function (item) {
+        var re = new RegExp("\\W" + item + "\\W", 'g');
+        clean = clean.replace(re, " ");
+    });
+    return clean;
+}
